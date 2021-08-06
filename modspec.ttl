@@ -6,7 +6,8 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @base <http://www.opengis.net/def/spec-element/> .
 
-<http://www.opengis.net/def/spec-element/> rdf:type owl:Ontology .
+<http://www.opengis.net/def/spec-element/> rdf:type owl:Ontology ;
+                                            rdfs:label "OGC Modular Specification in RDF"@en .
 
 #################################################################
 #    Annotation properties
@@ -21,250 +22,251 @@
 #    Object Properties
 #################################################################
 
-###  http://www.opengis.net/def/spec-element/authority
+###  http://www.opengis.net/def/spec-element/class
+:class rdf:type owl:ObjectProperty ;
+       rdfs:range :ConformanceClass ,
+                  :RequirementsClass ;
+       rdfs:label "class"@en .
+
+
+###  http://www.opengis.net/def/spec-element/dependency
+:dependency rdf:type owl:ObjectProperty ;
+            rdfs:domain :RequirementsClass ;
+            rdfs:range :RequirementsClass ;
+            rdfs:label "dependency"@en .
+
+
+###  http://www.opengis.net/def/spec-element/module
+:module rdf:type owl:ObjectProperty ;
+        rdfs:domain :RequirementsClass ;
+        rdfs:range :RequirementsModule ;
+        rdfs:label "module"@en .
+
+
+###  http://www.opengis.net/def/spec-element/requirement
+:requirement rdf:type owl:ObjectProperty ;
+             rdfs:domain :ConformanceTest ,
+                         :RequirementsModule ;
+             rdfs:range :Requirement ;
+             rdfs:label "requirement"@en .
+
+
+###  http://www.opengis.net/def/spec-element/targetType
+:targetType rdf:type owl:ObjectProperty ;
+            rdfs:domain :RequirementsClass ;
+            rdfs:range :StandardizationTargetType ;
+            rdfs:label "target type"@en .
+
+
+###  http://www.opengis.net/def/spec-element/test
+:test rdf:type owl:ObjectProperty ;
+      rdfs:domain :NormativeStatement ;
+      rdfs:range :ConformanceTest ;
+      rdfs:label "test"@en .
+
+
+###  http://www.opengis.net/def/spec-element/testType
+:testType rdf:type owl:ObjectProperty ;
+          rdfs:domain :ConformanceTest ;
+          rdfs:range :TestType ;
+          rdfs:label "test type"@en .
+
+
+###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#authority
 :authority rdf:type owl:ObjectProperty ;
-           rdfs:domain <http://www.opengis.net/def/spec-element/Specification> ;
+           rdfs:domain :Specification ;
            rdfs:range :Principal ;
            rdfs:label "authority"@en .
 
 
-###  http://www.opengis.net/def/spec-element/testSuite
+###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#testSuite
 :testSuite rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf owl:topObjectProperty ;
-           rdfs:domain <http://www.opengis.net/def/spec-element/Specification> ;
-           rdfs:range <http://www.opengis.net/def/spec-element/ConformanceSuite> ;
+           rdfs:domain :Specification ;
+           rdfs:range :ConformanceSuite ;
            rdfs:label "test suite"@en .
-
-
-###  http://www.opengis.net/def/spec-element/class
-<http://www.opengis.net/def/spec-element/class> rdf:type owl:ObjectProperty ;
-                                                 rdfs:range <http://www.opengis.net/def/spec-element/ConformanceClass> ,
-                                                            <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                 rdfs:label "class"@en .
-
-
-###  http://www.opengis.net/def/spec-element/dependency
-<http://www.opengis.net/def/spec-element/dependency> rdf:type owl:ObjectProperty ;
-                                                      rdfs:domain <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                      rdfs:range <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                      rdfs:label "dependency"@en .
-
-
-###  http://www.opengis.net/def/spec-element/module
-<http://www.opengis.net/def/spec-element/module> rdf:type owl:ObjectProperty ;
-                                                  rdfs:domain <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                  rdfs:range <http://www.opengis.net/def/spec-element/RequirementsModule> ;
-                                                  rdfs:label "module"@en .
-
-
-###  http://www.opengis.net/def/spec-element/requirement
-<http://www.opengis.net/def/spec-element/requirement> rdf:type owl:ObjectProperty ;
-                                                       rdfs:domain <http://www.opengis.net/def/spec-element/ConformanceTest> ,
-                                                                   <http://www.opengis.net/def/spec-element/RequirementsModule> ;
-                                                       rdfs:range <http://www.opengis.net/def/spec-element/Requirement> ;
-                                                       rdfs:label "requirement"@en .
-
-
-###  http://www.opengis.net/def/spec-element/targetType
-<http://www.opengis.net/def/spec-element/targetType> rdf:type owl:ObjectProperty ;
-                                                      rdfs:domain <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                      rdfs:range <http://www.opengis.net/def/spec-element/StandardizationTargetType> ;
-                                                      rdfs:label "target type"@en .
-
-
-###  http://www.opengis.net/def/spec-element/test
-<http://www.opengis.net/def/spec-element/test> rdf:type owl:ObjectProperty ;
-                                                rdfs:domain <http://www.opengis.net/def/spec-element/NormativeStatement> ;
-                                                rdfs:range <http://www.opengis.net/def/spec-element/ConformanceTest> ;
-                                                rdfs:label "test"@en .
-
-
-###  http://www.opengis.net/def/spec-element/testType
-<http://www.opengis.net/def/spec-element/testType> rdf:type owl:ObjectProperty ;
-                                                    rdfs:domain <http://www.opengis.net/def/spec-element/ConformanceTest> ;
-                                                    rdfs:range <http://www.opengis.net/def/spec-element/TestType> ;
-                                                    rdfs:label "test type"@en .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://www.opengis.net/def/spec-element/contactInformation
-:contactInformation rdf:type owl:DatatypeProperty ;
-                    rdfs:domain :Principal ;
-                    rdfs:range xsd:string .
-
-
 ###  http://www.opengis.net/def/spec-element/conformanceCertificates
-<http://www.opengis.net/def/spec-element/conformanceCertificates> rdf:type owl:DatatypeProperty ;
-                                                                   rdfs:domain <http://www.opengis.net/def/spec-element/StandardizationTarget> ;
-                                                                   rdfs:range xsd:string .
+:conformanceCertificates rdf:type owl:DatatypeProperty ;
+                         rdfs:domain :StandardizationTarget ;
+                         rdfs:range xsd:string .
 
 
 ###  http://www.opengis.net/def/spec-element/date
-<http://www.opengis.net/def/spec-element/date> rdf:type owl:DatatypeProperty ;
-                                                rdfs:domain <http://www.opengis.net/def/spec-element/Specification> ;
-                                                rdfs:range xsd:dateTime .
+:date rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Specification ;
+      rdfs:range xsd:dateTime .
 
 
 ###  http://www.opengis.net/def/spec-element/name
-<http://www.opengis.net/def/spec-element/name> rdf:type owl:DatatypeProperty ;
-                                                rdfs:domain <http://www.opengis.net/def/spec-element/Specification> ;
-                                                rdfs:range xsd:string .
+:name rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Specification ;
+      rdfs:range xsd:string .
 
 
 ###  http://www.opengis.net/def/spec-element/reference
-<http://www.opengis.net/def/spec-element/reference> rdf:type owl:DatatypeProperty ;
-                                                     rdfs:domain <http://www.opengis.net/def/spec-element/ConformanceTest> ;
-                                                     rdfs:range xsd:string ;
-                                                     rdfs:label "reference"@en .
+:reference rdf:type owl:DatatypeProperty ;
+           rdfs:domain :ConformanceTest ;
+           rdfs:range xsd:string ;
+           rdfs:label "reference"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/status
-<http://www.opengis.net/def/spec-element/status> rdf:type owl:DatatypeProperty ;
-                                                  rdfs:domain <http://www.opengis.net/def/spec-element/Specification> ;
-                                                  rdfs:range xsd:string .
+:status rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Specification ;
+        rdfs:range xsd:string .
 
 
 ###  http://www.opengis.net/def/spec-element/testMethod
-<http://www.opengis.net/def/spec-element/testMethod> rdf:type owl:DatatypeProperty ;
-                                                      rdfs:subPropertyOf owl:topDataProperty ;
-                                                      rdfs:domain <http://www.opengis.net/def/spec-element/ConformanceTest> ;
-                                                      rdfs:range xsd:string .
+:testMethod rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf owl:topDataProperty ;
+            rdfs:domain :ConformanceTest ;
+            rdfs:range xsd:string .
 
 
 ###  http://www.opengis.net/def/spec-element/testPurpose
-<http://www.opengis.net/def/spec-element/testPurpose> rdf:type owl:DatatypeProperty ;
-                                                       rdfs:domain <http://www.opengis.net/def/spec-element/ConformanceTest> ;
-                                                       rdfs:range xsd:string .
+:testPurpose rdf:type owl:DatatypeProperty ;
+             rdfs:domain :ConformanceTest ;
+             rdfs:range xsd:string .
+
+
+###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#contactInformation
+:contactInformation rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Principal ;
+                    rdfs:range xsd:string .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.opengis.net/def/spec-element/Principal
-:Principal rdf:type owl:Class ;
-           rdfs:label "principal"@en .
-
-
 ###  http://www.opengis.net/def/spec-element/ConformanceClass
-<http://www.opengis.net/def/spec-element/ConformanceClass> rdf:type owl:Class ;
-                                                            rdfs:label "conformance class"@en .
+:ConformanceClass rdf:type owl:Class ;
+                  rdfs:label "conformance class"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/ConformanceSuite
-<http://www.opengis.net/def/spec-element/ConformanceSuite> rdf:type owl:Class ;
-                                                            rdfs:label "conformance suite"@en ;
-                                                            <http://www.w3.org/2004/02/skos/core#definition> "set of conformance classes that define tests for all requirements of a standard"@en .
+:ConformanceSuite rdf:type owl:Class ;
+                  rdfs:label "conformance suite"@en ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "set of conformance classes that define tests for all requirements of a standard"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/ConformanceTest
-<http://www.opengis.net/def/spec-element/ConformanceTest> rdf:type owl:Class ;
-                                                           rdfs:label "conformance test"@en ;
-                                                           <http://www.w3.org/2004/02/skos/core#definition> "test, abstract or real, of one or more requirements contained within a standard, or set of standards"@en .
+:ConformanceTest rdf:type owl:Class ;
+                 rdfs:label "conformance test"@en ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "test, abstract or real, of one or more requirements contained within a standard, or set of standards"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/ConformanceTestModule
-<http://www.opengis.net/def/spec-element/ConformanceTestModule> rdf:type owl:Class ;
-                                                                 rdfs:label "conformance test module"@en ;
-                                                                 <http://www.w3.org/2004/02/skos/core#definition> "set of related tests, all within a single conformance test class"@en .
+:ConformanceTestModule rdf:type owl:Class ;
+                       rdfs:label "conformance test module"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "set of related tests, all within a single conformance test class"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/CoreRequirementsClass
-<http://www.opengis.net/def/spec-element/CoreRequirementsClass> rdf:type owl:Class ;
-                                                                 rdfs:subClassOf <http://www.opengis.net/def/spec-element/RequirementsClass> ;
-                                                                 rdfs:label "core requirements class"@en ;
-                                                                 <http://www.w3.org/2004/02/skos/core#definition> "unique requirements class that must be satisfied by any conformant standardization targets associated to the specification"@en .
+:CoreRequirementsClass rdf:type owl:Class ;
+                       rdfs:subClassOf :RequirementsClass ;
+                       rdfs:label "core requirements class"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "unique requirements class that must be satisfied by any conformant standardization targets associated to the specification"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/GeneralRecommendation
-<http://www.opengis.net/def/spec-element/GeneralRecommendation> rdf:type owl:Class ;
-                                                                 rdfs:subClassOf <http://www.opengis.net/def/spec-element/Recommendation> ;
-                                                                 rdfs:label "general recommendation"@en ;
-                                                                 <http://www.w3.org/2004/02/skos/core#definition> "recommendation applying to all entities in a specification mode"@en .
+:GeneralRecommendation rdf:type owl:Class ;
+                       rdfs:subClassOf :Recommendation ;
+                       rdfs:label "general recommendation"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "recommendation applying to all entities in a specification mode"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/NormativeStatement
-<http://www.opengis.net/def/spec-element/NormativeStatement> rdf:type owl:Class ;
-                                                              rdfs:subClassOf <http://www.opengis.net/def/spec-element/Statement> ;
-                                                              rdfs:label "normative statement"@en .
+:NormativeStatement rdf:type owl:Class ;
+                    rdfs:subClassOf :Statement ;
+                    rdfs:label "normative statement"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Profile
-<http://www.opengis.net/def/spec-element/Profile> rdf:type owl:Class ;
-                                                   rdfs:label "profile"@en ,
-                                                              "specification or standard consisting of a set of references to one or more base standards and/or other profiles, and the identification of any chosen conformance test classes, conforming subsets, options and parameters of those base standards, or profiles necessary to accomplish a particular function"@en .
+:Profile rdf:type owl:Class ;
+         rdfs:label "profile"@en ,
+                    "specification or standard consisting of a set of references to one or more base standards and/or other profiles, and the identification of any chosen conformance test classes, conforming subsets, options and parameters of those base standards, or profiles necessary to accomplish a particular function"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Recommendation
-<http://www.opengis.net/def/spec-element/Recommendation> rdf:type owl:Class ;
-                                                          rdfs:subClassOf <http://www.opengis.net/def/spec-element/NormativeStatement> ;
-                                                          rdfs:label "recommendation"@en ;
-                                                          <http://www.w3.org/2004/02/skos/core#definition> """expression in the content of a document conveying that among several possibilities one is
+:Recommendation rdf:type owl:Class ;
+                rdfs:subClassOf :NormativeStatement ;
+                rdfs:label "recommendation"@en ;
+                <http://www.w3.org/2004/02/skos/core#definition> """expression in the content of a document conveying that among several possibilities one is
 recommended as particularly suitable, without mentioning or excluding others, or that a certain
 course of action is preferred but not necessarily required, or that (in the negative form) a certain
 possibility or course of action is deprecated but not prohibited"""@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Requirement
-<http://www.opengis.net/def/spec-element/Requirement> rdf:type owl:Class ;
-                                                       rdfs:subClassOf <http://www.opengis.net/def/spec-element/NormativeStatement> ;
-                                                       rdfs:label "requirement"@en ;
-                                                       <http://www.w3.org/2004/02/skos/core#definition> """expression in the content of a document conveying criteria to be fulfilled if compliance with the
+:Requirement rdf:type owl:Class ;
+             rdfs:subClassOf :NormativeStatement ;
+             rdfs:label "requirement"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> """expression in the content of a document conveying criteria to be fulfilled if compliance with the
 document is to be claimed and from which no deviation is permitted"""@en .
 
 
 ###  http://www.opengis.net/def/spec-element/RequirementsClass
-<http://www.opengis.net/def/spec-element/RequirementsClass> rdf:type owl:Class ;
-                                                             rdfs:label "requirements class"@en ;
-                                                             <http://www.w3.org/2004/02/skos/core#definition> "aggregate of all requirement modules that must all be satisfied to satisfy a conformance test class"@en .
+:RequirementsClass rdf:type owl:Class ;
+                   rdfs:label "requirements class"@en ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "aggregate of all requirement modules that must all be satisfied to satisfy a conformance test class"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/RequirementsModule
-<http://www.opengis.net/def/spec-element/RequirementsModule> rdf:type owl:Class ;
-                                                              rdfs:label "requirements module"@en ;
-                                                              <http://www.w3.org/2004/02/skos/core#definition> "aggregate of requirements and recommendations of a specification against a single standardization target type"@en .
+:RequirementsModule rdf:type owl:Class ;
+                    rdfs:label "requirements module"@en ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "aggregate of requirements and recommendations of a specification against a single standardization target type"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Specification
-<http://www.opengis.net/def/spec-element/Specification> rdf:type owl:Class ;
-                                                         rdfs:label "specification"@en ;
-                                                         <http://www.w3.org/2004/02/skos/core#definition> "document containing recommendations, requirements and conformance tests for those requirements"@en .
+:Specification rdf:type owl:Class ;
+               rdfs:label "specification"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "document containing recommendations, requirements and conformance tests for those requirements"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Standard
-<http://www.opengis.net/def/spec-element/Standard> rdf:type owl:Class ;
-                                                    rdfs:subClassOf <http://www.opengis.net/def/spec-element/Specification> ;
-                                                    rdfs:label "standard"@en ;
-                                                    <http://www.w3.org/2004/02/skos/core#definition> "specification that has been approved by a legitimate Standards Body"@en .
+:Standard rdf:type owl:Class ;
+          rdfs:subClassOf :Specification ;
+          rdfs:label "standard"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "specification that has been approved by a legitimate Standards Body"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/StandardizationTarget
-<http://www.opengis.net/def/spec-element/StandardizationTarget> rdf:type owl:Class ;
-                                                                 rdfs:label "standardization target"@en ;
-                                                                 <http://www.w3.org/2004/02/skos/core#definition> "entity to which some requirements of a standard apply"@en .
+:StandardizationTarget rdf:type owl:Class ;
+                       rdfs:label "standardization target"@en ;
+                       <http://www.w3.org/2004/02/skos/core#definition> "entity to which some requirements of a standard apply"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/StandardizationTargetType
-<http://www.opengis.net/def/spec-element/StandardizationTargetType> rdf:type owl:Class ;
-                                                                     rdfs:label "standardization target type"@en .
+:StandardizationTargetType rdf:type owl:Class ;
+                           rdfs:label "standardization target type"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/Statement
-<http://www.opengis.net/def/spec-element/Statement> rdf:type owl:Class ;
-                                                     rdfs:label "statement"@en ;
-                                                     <http://www.w3.org/2004/02/skos/core#definition> "expression in a document conveying information"@en .
+:Statement rdf:type owl:Class ;
+           rdfs:label "statement"@en ;
+           <http://www.w3.org/2004/02/skos/core#definition> "expression in a document conveying information"@en .
 
 
 ###  http://www.opengis.net/def/spec-element/TestType
-<http://www.opengis.net/def/spec-element/TestType> rdf:type owl:Class ;
-				rdfs:label "test type"@en ;
-				owl:equivalentClass  [ a          owl:Class ;
-                               owl:oneOf  ( <http://www.opengis.net/def/spec-element/basic> <http://www.opengis.net/def/spec-element/capabilities> )
-                             ] .
-                                                    
+:TestType rdf:type owl:Class ;
+          owl:equivalentClass [ rdf:type owl:Class ;
+                                owl:oneOf ( :basic
+                                            :capabilities
+                                          )
+                              ] ;
+          rdfs:label "test type"@en .
+
+
+###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#Principal
+:Principal rdf:type owl:Class ;
+           rdfs:label "principal"@en .
 
 
 #################################################################
@@ -272,13 +274,13 @@ document is to be claimed and from which no deviation is permitted"""@en .
 #################################################################
 
 ###  http://www.opengis.net/def/spec-element/basic
-<http://www.opengis.net/def/spec-element/basic> rdf:type owl:NamedIndividual ,
-                                                          <http://www.opengis.net/def/spec-element/TestType> .
+:basic rdf:type owl:NamedIndividual ,
+                :TestType .
 
 
 ###  http://www.opengis.net/def/spec-element/capabilities
-<http://www.opengis.net/def/spec-element/capabilities> rdf:type owl:NamedIndividual ,
-                                                                 <http://www.opengis.net/def/spec-element/TestType> .
+:capabilities rdf:type owl:NamedIndividual ,
+                       :TestType .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
