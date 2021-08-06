@@ -1,4 +1,4 @@
-@prefix : <http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#> .
+@prefix : <http://www.opengis.net/def/spec-element/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
@@ -72,14 +72,14 @@
           rdfs:label "test type"@en .
 
 
-###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#authority
+###  http://www.opengis.net/def/spec-element/authority
 :authority rdf:type owl:ObjectProperty ;
            rdfs:domain :Specification ;
            rdfs:range :Principal ;
            rdfs:label "authority"@en .
 
 
-###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#testSuite
+###  http://www.opengis.net/def/spec-element/testSuite
 :testSuite rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf owl:topObjectProperty ;
            rdfs:domain :Specification ;
@@ -135,7 +135,7 @@
              rdfs:range xsd:string .
 
 
-###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#contactInformation
+###  http://www.opengis.net/def/spec-element/contactInformation
 :contactInformation rdf:type owl:DatatypeProperty ;
                     rdfs:domain :Principal ;
                     rdfs:range xsd:string .
@@ -264,7 +264,7 @@ document is to be claimed and from which no deviation is permitted"""@en .
           rdfs:label "test type"@en .
 
 
-###  http://www.semanticweb.org/timohomburg/ontologies/2021/7/untitled-ontology-8#Principal
+###  http://www.opengis.net/def/spec-element/Principal
 :Principal rdf:type owl:Class ;
            rdfs:label "principal"@en .
 
